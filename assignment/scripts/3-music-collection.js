@@ -3,6 +3,8 @@ let collection = [];
 // Factory funstion to add an object of album info to the collection array
 const addTocollection = (albumTitle, artist, yearPublished) => {
     if (albumTitle && artist && yearPublished) {
+        albumTitle =albumTitle.toUpperCase();
+        artist =artist.toUpperCase();
         let newObject = {
             albumTitle: albumTitle,
             artist: artist,
@@ -14,9 +16,9 @@ const addTocollection = (albumTitle, artist, yearPublished) => {
         return 'Need more info. Check to make sure you have an album title, artist, and year published.'
     }
 }
-console.log(addTocollection('Bloom','Rüfüs Du Sol', 2016));
+console.log(addTocollection('Bloom','Rufus Du Sol', 2016));
 console.log(addTocollection('American Candy','The Maine', 2015));
-console.log(addTocollection('Solace','Rüfüs Du Sol', 2018));
+console.log(addTocollection('Solace','Rufus Du Sol', 2018));
 console.log(addTocollection('Love Your Neighbors','Your Neighbors', 2021));
 console.log(addTocollection('For Ever','Jungle', 2018));
 console.log(addTocollection('Thrill of the Arts','Vulfpeck', 2015));
@@ -33,6 +35,7 @@ showCollection(collection);
 //console.log(addTocollection('Bloom', 2016));
 
 const findByArtist = artistSearch => {
+    artistSearch = artistSearch.toUpperCase();
     let artistArray = [];
     for (info of collection) {
         if (info.artist === artistSearch) {
@@ -40,4 +43,6 @@ const findByArtist = artistSearch => {
         }
     } return artistArray
 }
- console.log(findByArtist('Rüfüs Du Sol'))
+ console.log(findByArtist('rufus du sol'));
+ console.log(findByArtist('junGle'));
+ console.log(findByArtist('arcade fire'));

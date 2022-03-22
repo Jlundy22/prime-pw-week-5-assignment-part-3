@@ -2,13 +2,17 @@ console.log('***** Music Collection *****')
 let collection = [];
 // Factory funstion to add an object of album info to the collection array
 const addTocollection = (albumTitle, artist, yearPublished) => {
-    let newObject = {
-        albumTitle: albumTitle,
-        artist: artist,
-        yearPublished: yearPublished
+    if (albumTitle && artist && yearPublished) {
+        let newObject = {
+            albumTitle: albumTitle,
+            artist: artist,
+            yearPublished: yearPublished
+        }
+        collection.push(newObject);
+        return newObject;
+    } else {
+        return 'Need more info. Check to make sure you have an album title, artist, and year published.'
     }
-    collection.push(newObject);
-    return newObject;
 }
 console.log(addTocollection('Bloom','Rüfüs Du Sol', 2016));
 console.log(addTocollection('American Candy','The Maine', 2015));
@@ -26,3 +30,5 @@ const showCollection = array => {
 
 }
 showCollection(collection);
+//console.log(addTocollection('Bloom', 2016));
+

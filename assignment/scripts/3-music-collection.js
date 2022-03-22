@@ -24,7 +24,7 @@ console.log(collection);
 
 const showCollection = array => {
     console.log(`There are ${array.length} albums in this collection.`);
-    for (album of collection) {
+    for (album of array) {
         console.log(`${album.albumTitle} by ${album.artist} , published in ${album.yearPublished}.`)
     }
 
@@ -32,3 +32,12 @@ const showCollection = array => {
 showCollection(collection);
 //console.log(addTocollection('Bloom', 2016));
 
+const findByArtist = artistSearch => {
+    let artistArray = [];
+    for (info of collection) {
+        if (info.artist === artistSearch) {
+            artistArray.push(info);
+        }
+    } return artistArray
+}
+ console.log(findByArtist('Rüfüs Du Sol'))

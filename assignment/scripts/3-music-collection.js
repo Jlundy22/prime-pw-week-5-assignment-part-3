@@ -53,52 +53,41 @@ const findByArtist = artistSearch => {
  console.log(findByArtist('arcade fire'));
  
  const search = searchObject => {
+    let artistSearchByYear =[];
+    if (typeof(searchObject) === 'undefined') {
+        artistSearchByYear = collection;
+    } else {
+     for (artistYear of collection){
+        if (Object.keys(searchObject).length === 0) {
+            artistSearchByYear = collection;
+        }else if (Object.keys(searchObject).length > 0) {
+            if (artistYear.artist === searchObject.artist.toUpperCase() && artistYear.yearPublished === searchObject.year) {
+                artistSearchByYear.push(artistYear)
+        }
+       }
+     }
+    }  return artistSearchByYear;
+   }
+   console.log(search({artist:'the maine', year: 2015}));
+   
+  
+  /* else if (artistYear.artist === searchObject.artist && artistYear.yearPublished === searchObject.year) {
+    artistSearchByYear.push(artistYear)*/
+ 
+  /* if (searchObject.length === 0) {
+    artistSearchByYear = collection
+    }
+ 
+*/
+
+  /* const search = searchObject => {
     searchObject.artist= searchObject.artist.toUpperCase();
     let artistSearchByYear =[];
     for (artistYear of collection){
-        //console.log(objectToSearch.year)
-        //console.log(artistYear.artist);
-        //console.log(artistYear.yearPublished);
-        //console.log(objectToSearch.artist)
+        
        if (artistYear.artist === searchObject.artist && artistYear.yearPublished === searchObject.year) {
            artistSearchByYear.push(artistYear)
        }
     } return artistSearchByYear
    }
-   console.log(search({artist:'the maine', year: 2015}));
-
- 
- 
- 
- 
- 
- /*const search = searchObject => {
-     let objectToSearch = searchObject
-     objectToSearch.artist= objectToSearch.artist.toUpperCase();
-     let artistSearchByYear =[];
-     for (artistYear of collection){
-         //console.log(objectToSearch.year)
-         //console.log(artistYear.artist);
-         //console.log(artistYear.yearPublished);
-         //console.log(objectToSearch.artist)
-        if (artistYear.artist === objectToSearch.artist && artistYear.yearPublished === objectToSearch.year) {
-            artistSearchByYear.push(artistYear)
-        }
-     } return artistSearchByYear
-    }
-    console.log(search({artist:'the maine' , year: 2015  }));
- 
- */
- 
- /*const search = (artist, year) => {
-     artist = artist.toUpperCase();
-     let artistSearchByYear = [];
-     for (artistYear of collection){
-         if (artistYear.artist === artist && artistYear.yearPublished === year) {
-             artistSearchByYear.push({artistYear})
-         }
-       } return artistSearchByYear;
-       
-     }
-     console.log(search('jungle', 2018));
-     */
+   console.log(search({artist:'the maine', year: 2015}));*/

@@ -1,6 +1,27 @@
 console.log('***** Music Collection *****')
+
 let collection = [];
 // Factory function to add an object of album info to the collection array
+
+
+const addTocollection = (albumTitle, artist, yearPublished,) => {
+    if (albumTitle && artist && yearPublished) {
+        albumTitle =albumTitle.toUpperCase();
+        artist =artist.toUpperCase();
+        let newObject = {
+            albumTitle: albumTitle,
+            artist: artist,
+            yearPublished: yearPublished
+        }
+        collection.push(newObject);
+        return newObject;
+    } else {
+        console.log('Need more info. Check to make sure you have an album title, artist, year published and a track array.')
+    }
+}
+
+
+/*
 const addTocollection = (albumTitle, artist, yearPublished) => {
     if (albumTitle && artist && yearPublished) {
         albumTitle =albumTitle.toUpperCase();
@@ -13,28 +34,20 @@ const addTocollection = (albumTitle, artist, yearPublished) => {
         collection.push(newObject);
         return newObject;
     } else {
-        return 'Need more info. Check to make sure you have an album title, artist, and year published.'
+        console.log('Need more info. Check to make sure you have an album title, artist, and year published.')
     }
 }
-// adding albums to collection array
-console.log(addTocollection('Bloom','Rufus Du Sol', 2016));
-console.log(addTocollection('American Candy','The Maine', 2015));
-console.log(addTocollection('Solace','Rufus Du Sol', 2018));
-console.log(addTocollection('Love Your Neighbors','Your Neighbors', 2021));
-console.log(addTocollection('For Ever','Jungle', 2018));
-console.log(addTocollection('Thrill of the Arts','Vulfpeck', 2015));
-console.log(collection);
+
+*/
 
 const showCollection = array => {
     console.log(`There are ${array.length} albums in this collection.`);
     for (album of array) {
-        console.log(`${album.albumTitle} by ${album.artist} , published in ${album.yearPublished}.`)
+        console.log(`${album.albumTitle} by ${album.artist} , published in ${album.yearPublished}, Track list ${album.tracks}`)
     }
 
 }
-showCollection(collection);
-//Test if addToCollection does not have enough info
-console.log(addTocollection('Bloom', 2016));
+
 
 //function for find all albums by an artist in the collection array
 const findByArtist = artistSearch => {
@@ -47,47 +60,78 @@ const findByArtist = artistSearch => {
     } return artistArray
 }
 
-//testing findByArtist function
- console.log(findByArtist('rufus du sol'));
- console.log(findByArtist('junGle'));
- console.log(findByArtist('arcade fire'));
- 
- const search = searchObject => {
+const search = searchObject => {
     let artistSearchByYear =[];
-    if (typeof(searchObject) === 'undefined') {
+    if (typeof(searchObject) === 'undefined'|| Object.keys(searchObject).length === 0) {
         artistSearchByYear = collection;
-    } else {
-     for (artistYear of collection){
-        if (Object.keys(searchObject).length === 0) {
-            artistSearchByYear = collection;
-        }else if (Object.keys(searchObject).length > 0) {
+    }else {
+     for (let artistYear of collection){
+         let trackArrayToSearch= artistYear.tracks
+         if (Object.keys(searchObject).length > 0) {
             if (artistYear.artist === searchObject.artist.toUpperCase() && artistYear.yearPublished === searchObject.year) {
                 artistSearchByYear.push(artistYear)
-        }
+             }
+         }
        }
-     }
-    }  return artistSearchByYear;
+     } return artistSearchByYear;
    }
-   console.log(search({artist:'the maine', year: 2015}));
+   
    
   
-  /* else if (artistYear.artist === searchObject.artist && artistYear.yearPublished === searchObject.year) {
-    artistSearchByYear.push(artistYear)*/
- 
-  /* if (searchObject.length === 0) {
-    artistSearchByYear = collection
-    }
- 
+
+
+// adding albums to collection array
+addTocollection('Bloom','Rufus Du Sol', 2016,);
+addTocollection('American Candy','The Maine', 2015,);
+addTocollection('Solace','Rufus Du Sol', 2018, );
+addTocollection('Love Your Neighbors','Your Neighbors', 2021, );
+addTocollection('For Ever','Jungle', 2018, );
+addTocollection('Thrill of the Arts','Vulfpeck', 2015, );
+console.log('expect to see an array with 6 album objects in it', collection);
+console.log('expect the string - There are 6 albums in this collection. and logging all 6 albums with artist, album name , year published and track list ')
+showCollection(collection);
+//Test if addToCollection does not have enough info
+console.log('Expect to see - Need more info. Check to make sure you have an album title, artist, and year published.')
+console.log(addTocollection('Bloom', 2016));
+
+//testing findByArtist function
+
+console.log('expect to see 2 album objects')
+console.log(findByArtist('rufus du sol'));
+console.log('expect to see 1 album object')
+console.log(findByArtist('junGle'));
+console.log('expect to see an empty array')
+console.log(findByArtist('arcade fire'));
+
+ //testing search function
+ console.log('TEST')
+ console.log('expect to see 1 album objects')
+console.log(search({artist:'the maine', year: 2015}));
+
+console.log('expect to see an empty array')
+console.log(search({artist:'the maine', year: 2016 }));
+
+console.log('expect to see 6 album objects')
+console.log(search({}));
+
+console.log('expect to see 6 album objects')
+console.log(search());
+
+
+
+/*
+addTocollection('Bloom','Rufus Du Sol', 2016,['1. Brighter: 4:43', '2. Like an Animal: 4:04', '3. Say a Prayer for Me: 4:38']);
+addTocollection('American Candy','The Maine', 2015,['1. Miles Away: 3:38', '2. Same Suit, Different Tie: 3:018', '3. My Hair: 3:15']);
+addTocollection('Solace','Rufus Du Sol', 2018, ['1. Treat You Better: 4:33', '2. Eyes: 3:50', '3. New Sky: 5:27']);
+addTocollection('Love Your Neighbors','Your Neighbors', 2021, ['1. Eggs: 3:49', '2. Pseudo: 2:34', '3. Track 3: 4:03']);
+addTocollection('For Ever','Jungle', 2018, ['1. Smile: 3:07', '2. Heavy, California: 3:05', '3. Beat 54 (All Good Now): 4:07']);
+addTocollection('Thrill of the Arts','Vulfpeck', 2015, ['1. Welcome to Vulf Records: 2:43', '2. Back Pocket: 3:01', '3. Funky Duck: 2:10']);
+console.log('expect to see an array with 6 album objects in it', collection);
+console.log('expect the string - There are 6 albums in this collection. and logging all 6 albums with artist, album name , year published and track list ')
+
 */
 
-  /* const search = searchObject => {
-    searchObject.artist= searchObject.artist.toUpperCase();
-    let artistSearchByYear =[];
-    for (artistYear of collection){
-        
-       if (artistYear.artist === searchObject.artist && artistYear.yearPublished === searchObject.year) {
-           artistSearchByYear.push(artistYear)
-       }
-    } return artistSearchByYear
-   }
-   console.log(search({artist:'the maine', year: 2015}));*/
+
+
+
+ 

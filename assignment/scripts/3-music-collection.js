@@ -55,8 +55,8 @@ const search = searchObject => {
             if (artistYear.artist === searchObject.artist.toUpperCase() && artistYear.yearPublished === searchObject.year) {
                 for (let i = 0; i < collection.length; i++) {
                     for (let j = 0; j < 3; j++  ) {
-                        let singleTrack = collection[i].tracks[j];
-                        if (singleTrack.includes(searchObject.track)) {
+                        let singleTrack = collection[i].tracks[j].toUpperCase();
+                        if (singleTrack.includes(searchObject.track.toUpperCase())) {
                             artistSearchByYear.push(artistYear)
                         }
                     }
@@ -106,7 +106,7 @@ for (let i = 0; i < collection.length; i++) {
 
  //testing search function
 console.log('expect to see 1 album objects')
-console.log(search({artist:'rufus du sol', year: 2016, track: 'Say a Prayer for Me'}));
+console.log(search({artist:'rufus du sol', year: 2016, track: 'say A PrAyer for Me'}));
 
 console.log('expect to see an empty array')
 console.log(search({artist:'the maine', year: 2016, track: 'Miles Away' }));

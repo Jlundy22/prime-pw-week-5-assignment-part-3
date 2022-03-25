@@ -53,7 +53,8 @@ const search = searchObject => {
                     for (let j = 0; j < 3; j++  ) {
                         let singleTrack = collection[i].tracks[j].toUpperCase();
                         if (singleTrack.includes(searchObject.track.toUpperCase())) {
-                            artistSearchByYear.push(artistYear)
+                            artistSearchByYear.push(artistYear);
+                            break;
                         }
                     }
                 }
@@ -103,6 +104,9 @@ console.log(search({artist:'rufus du sol', year: 2016, track: 'say A PrAyer for 
 
 console.log('expect to see 1 album object')
 console.log(search({artist:'rufus du sol', year: 2018, track: 'NEW sKy'}));
+
+console.log('expect to see 1 album object')
+console.log(search({artist:'your neighbors', year: 2021, track: 'eGGs'}));
 
 console.log('expect to see an empty array')
 console.log(search({artist:'the maine', year: 2016, track: 'Miles Away' }));
